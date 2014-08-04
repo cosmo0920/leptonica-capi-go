@@ -6,7 +6,6 @@ package leptonica
 import "C"
 import (
 	"errors"
-	// "os"
 	"unsafe"
 )
 
