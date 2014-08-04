@@ -30,3 +30,8 @@ func pixRead(filename string) (*Pix, error) {
 	pix := &Pix{pix: cPix}
 	return pix, nil
 }
+
+// rawPix :: Ptr Pix -> Ptr C.PIX
+func (t *Pix) rawPix() *C.PIX {
+	return t.pix
+}
