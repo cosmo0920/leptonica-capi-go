@@ -30,6 +30,17 @@ func pixRead(filename string) (*Pix, error) {
 	return pix, nil
 }
 
+func (t *Pix) pixClose() {
+	t.mutex.Lock()
+	defer t.mutex.Unlock()
+
+	if !t.disposed {
+		C.pixDestroy(&t.pix)
+		C.free(unsafe.Pointer(t.pix))
+		t.disposed = true
+	}
+}
+
 // rawPix :: Ptr Pix -> Ptr C.PIX
 func (t *Pix) rawPix() *C.PIX {
 	return t.pix
