@@ -17,6 +17,10 @@ $ brew install leptonica
 $ sudo apt-get install libleptonica-dev
 ```
 
+### FreeBSD (pkgng)
+
+under construction...
+
 ## import
 
 ```bash
