@@ -42,6 +42,6 @@ func (t *Pix) pixClose() {
 }
 
 // rawPix :: Ptr Pix -> Ptr C.PIX
-func (t *Pix) rawPix() *C.PIX {
+func (t *Pix) RawPix() *C.PIX {
 	return t.pix
 }
