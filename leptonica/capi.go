@@ -15,8 +15,8 @@ func Version() string {
 	return version
 }
 
-// pixRead :: FilePath -> Ptr Pix
-func pixRead(filename string) (*Pix, error) {
+// PixRead :: FilePath -> Ptr Pix
+func PixRead(filename string) (*Pix, error) {
 	cFilename := C.CString(filename)
 	defer C.free(unsafe.Pointer(cFilename))
 
