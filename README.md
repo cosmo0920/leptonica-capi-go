@@ -19,7 +19,10 @@ $ sudo apt-get install libleptonica-dev
 
 ### FreeBSD (pkgng)
 
-under construction...
+```bash
+$ export CC=clang
+$ pkg install leptonica
+```
 
 ## import
 
