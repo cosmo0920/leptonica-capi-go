@@ -8,6 +8,5 @@ import "C"
 
 /*
 Note: specify LDFLAGS by hand for workaround.
-BUG: FreeBSD 10 release lept.pc is not set ${prefix} and ${libdir}.
-This bug causes compilation error.
+BUG: FreeBSD 10 release do not provide leptonica with lept.pc.
 */
