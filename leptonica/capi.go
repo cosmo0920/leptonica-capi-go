@@ -30,7 +30,7 @@ func PixRead(filename string) (*Pix, error) {
 	return pix, nil
 }
 
-func (t *Pix) pixClose() {
+func (t *Pix) PixClose() {
 	t.mutex.Lock()
 	defer t.mutex.Unlock()
 
