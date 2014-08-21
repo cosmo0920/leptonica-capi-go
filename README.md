@@ -1,6 +1,8 @@
 Leptonica Go wrapper
 ===
 
+[![Build Status](https://travis-ci.org/cosmo0920/leptonica-capi-go.svg?branch=master)](https://travis-ci.org/cosmo0920/leptonica-capi-go) [![GoDoc](https://godoc.org/github.com/cosmo0920/leptonica-capi-go/leptonica?status.png)](https://godoc.org/github.com/cosmo0920/leptonica-capi-go/leptonica)
+
 ## instalation
 
 Before you use this library, please install `leptonica`.
