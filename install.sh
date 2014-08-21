@@ -7,6 +7,7 @@ wget http://www.leptonica.com/source/leptonica-1.70.tar.gz
 tar -xvzof leptonica-1.70.tar.gz
 cd leptonica-1.70
 ./configure
-make
+n_processors="$(grep '^processor' /proc/cpuinfo | wc -l)"
+make -j${n_processors}
 sudo make install
 sudo ldconfig
