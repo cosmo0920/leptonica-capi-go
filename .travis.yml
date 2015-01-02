@@ -16,4 +16,4 @@ install:
 
 script:
   - go build example/sample.go
-#  - go test
+  - go test
