@@ -7,7 +7,7 @@ import "C"
 import "sync"
 
 type Pix struct {
-	pix *C.PIX
+	pix      *C.PIX
 	disposed bool
-	mutex sync.Mutex
+	mutex    sync.Mutex
 }
