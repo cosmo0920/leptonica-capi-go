@@ -6,6 +6,7 @@ package leptonica
 import "C"
 import (
 	"errors"
+	"runtime"
 	"unsafe"
 )
 
@@ -27,10 +28,12 @@ func PixRead(filename string) (*Pix, error) {
 	}
 
 	pix := &Pix{pix: cPix}
+
+	runtime.SetFinalizer(pix, (*Pix).finalize)
 	return pix, nil
 }
 
-func (t *Pix) PixClose() {
+func (t *Pix) finalize() {
 	t.mutex.Lock()
 	defer t.mutex.Unlock()
 
