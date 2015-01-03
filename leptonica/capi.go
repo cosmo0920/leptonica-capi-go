@@ -59,6 +59,6 @@ func (t *Pix) RawPix() *C.PIX {
 }
 
 // BoxaGetBox :: Ptr Boxa -> int32 -> int32 -> Ptr C.BOX
-func BoxaGetBox(t *Boxa, index int32, flag CopyFlag) *C.BOX {
-	return C.boxaGetBox(t.boxa, C.l_int32(index), C.l_int32(flag))
+func BoxaGetBox(t *C.BOXA, index int32, flag CopyFlag) *C.BOX {
+	return C.boxaGetBox(t, C.l_int32(index), C.l_int32(flag))
 }
