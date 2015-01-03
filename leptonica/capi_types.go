@@ -13,5 +13,5 @@ type Pix struct {
 }
 
 type Boxa struct {
-	boxa     *C.struct_Boxa
+	boxa     *C.BOXA
 }
