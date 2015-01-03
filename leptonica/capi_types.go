@@ -11,3 +11,7 @@ type Pix struct {
 	disposed bool
 	mutex    sync.Mutex
 }
+
+type Boxa struct {
+	boxa     *C.struct_Boxa
+}

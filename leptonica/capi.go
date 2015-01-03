@@ -10,6 +10,15 @@ import (
 	"unsafe"
 )
 
+type CopyFlag int32
+
+const (
+	L_INSERT CopyFlag = iota
+	L_COPY
+	L_CLONE
+	L_COPY_CLONE
+)
+
 func Version() string {
 	cVersion := C.getLeptonicaVersion()
 	version := C.GoString(cVersion)
@@ -47,4 +56,9 @@ func (t *Pix) finalize() {
 // rawPix :: Ptr Pix -> Ptr C.PIX
 func (t *Pix) RawPix() *C.PIX {
 	return t.pix
+}
+
+// BoxaGetBox :: Ptr Boxa -> int32 -> int32 -> Ptr C.struct_Box
+func BoxaGetBox(t *Boxa, index int32, flag CopyFlag) *C.struct_Box {
+	return C.boxaGetBox(t.boxa, C.l_int32(index), C.l_int32(flag))
 }
