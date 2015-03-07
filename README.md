@@ -26,6 +26,10 @@ $ export CC=clang
 $ pkg install leptonica
 ```
 
+### Windows
+
+Not supported yet.
+
 ## import
 
 ```bash
