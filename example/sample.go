@@ -1,7 +1,7 @@
 package main
 
 import (
-	lept "../leptonica"
+	lept "github.com/cosmo0920/leptonica-capi-go"
 	"fmt"
 )
 

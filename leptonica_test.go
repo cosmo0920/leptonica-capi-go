@@ -1,7 +1,7 @@
 package leptonica_test
 
 import (
-	lept "./leptonica"
+	lept "."
 	"testing"
 )
 
