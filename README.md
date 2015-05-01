@@ -23,7 +23,7 @@ $ sudo apt-get install libleptonica-dev
 
 ```bash
 $ export CC=clang
-$ pkg install leptonica
+$ sudo pkg install leptonica
 ```
 
 ### Windows
