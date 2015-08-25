@@ -5,7 +5,7 @@ Leptonica Go wrapper
 
 ## instalation
 
-Before you use this library, please install `leptonica`.
+Before you use this library, please install `leptonica-1.71`.
 
 ### OSX
 
