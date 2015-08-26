@@ -13,7 +13,7 @@ matrix:
       - go: tip
 
 install:
-  - bash install.sh
+  - bash travis/install.sh
 
 script:
   - go build
