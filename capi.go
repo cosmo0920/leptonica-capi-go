@@ -19,6 +19,29 @@ const (
 	L_COPY_CLONE
 )
 
+type IMGFormat int32
+const (
+	IFF_UNKNOWN IMGFormat = iota
+	IFF_BMP
+	IFF_JFIF_JPEG
+	IFF_PNG
+	IFF_TIFF
+	IFF_TIFF_PACKBITS
+	IFF_TIFF_RLE
+	IFF_TIFF_G3
+	IFF_TIFF_G4
+	IFF_TIFF_LZW
+	IFF_TIFF_ZIP
+	IFF_PNM
+	IFF_PS
+	IFF_GIF
+	IFF_JP2
+	IFF_WEBP
+	IFF_LPDF
+	IFF_DEFAULT
+	IFF_SPIX
+)
+
 func Version() string {
 	cVersion := C.getLeptonicaVersion()
 	version := C.GoString(cVersion)
@@ -51,6 +74,39 @@ func (t *Pix) finalize() {
 		C.free(unsafe.Pointer(t.pix))
 		t.disposed = true
 	}
+}
+
+func (t *Pix) GetDimension() (int, int) {
+	var w, h C.l_int32
+	C.pixGetDimensions(t.pix, &w, &h, nil)
+	return int(w), int(h)
+}
+
+func (t *Pix) RankFilterGray(h int, w int, rank float32) (*Pix, error) {
+	cPix := C.pixRankFilterGray(t.pix,
+		C.l_int32(h), C.l_int32(w), C.l_float32(rank))
+
+	if cPix == nil {
+		return nil, errors.New("cannot create *Pix")
+	}
+
+	pixd := &Pix{pix: cPix}
+
+	runtime.SetFinalizer(pixd, (*Pix).finalize)
+	return pixd, nil
+}
+
+func (t *Pix) PixWrite(path string, format IMGFormat) (error) {
+	cPath := C.CString(path)
+	defer C.free(unsafe.Pointer(cPath))
+
+	result := C.pixWrite(cPath, t.pix, C.l_int32(format))
+
+	if result == 0 {
+		return errors.New("cannot write *Pix")
+	}
+
+	return nil
 }
 
 // rawPix :: Ptr Pix -> Ptr C.PIX
