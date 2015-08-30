@@ -96,6 +96,34 @@ func (t *Pix) RankFilterGray(h int, w int, rank float32) (*Pix, error) {
 	return pixd, nil
 }
 
+func (t *Pix) DilateGray(h int, w int) (*Pix, error) {
+	cPix := C.pixDilateGray(t.pix,
+		C.l_int32(h), C.l_int32(w))
+
+	if cPix == nil {
+		return nil, errors.New("cannot create *Pix")
+	}
+
+	pixt := &Pix{pix: cPix}
+
+	runtime.SetFinalizer(pixt, (*Pix).finalize)
+	return pixt, nil
+}
+
+func (t *Pix) ErodeGray(h int, w int) (*Pix, error) {
+	cPix := C.pixErodeGray(t.pix,
+		C.l_int32(h), C.l_int32(w))
+
+	if cPix == nil {
+		return nil, errors.New("cannot create *Pix")
+	}
+
+	pixt := &Pix{pix: cPix}
+
+	runtime.SetFinalizer(pixt, (*Pix).finalize)
+	return pixt, nil
+}
+
 func (t *Pix) PixWrite(path string, format IMGFormat) (error) {
 	cPath := C.CString(path)
 	defer C.free(unsafe.Pointer(cPath))
