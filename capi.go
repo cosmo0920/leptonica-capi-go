@@ -42,6 +42,13 @@ const (
 	IFF_SPIX
 )
 
+type GrayChooseType int32
+const (
+	L_CHOOSE_MIN = 1 + iota
+	L_CHOOSE_MAX
+	L_CHOOSE_MAX_MIN_DIFF
+)
+
 func Version() string {
 	cVersion := C.getLeptonicaVersion()
 	version := C.GoString(cVersion)
