@@ -131,6 +131,73 @@ func (t *Pix) ErodeGray(h int, w int) (*Pix, error) {
 	return pixt, nil
 }
 
+func (t *Pix) ScaleGrayRank2(index int) (*Pix, error) {
+	cPix := C.pixScaleGrayRank2(t.pix, C.l_int32(index))
+
+	if cPix == nil {
+		return nil, errors.New("cannot create *Pix")
+	}
+
+	pixt := &Pix{pix: cPix}
+
+	runtime.SetFinalizer(pixt, (*Pix).finalize)
+	return pixt, nil
+}
+
+func (t *Pix) ConvertRGBToLuminance() (*Pix, error) {
+	cPix := C.pixConvertRGBToLuminance(t.pix)
+
+	if cPix == nil {
+		return nil, errors.New("cannot create *Pix")
+	}
+
+	pixt := &Pix{pix: cPix}
+
+	runtime.SetFinalizer(pixt, (*Pix).finalize)
+	return pixt, nil
+}
+
+func (t *Pix) ConvertRGBToGray(red float32, green float32, blue float32) (*Pix, error) {
+	cPix := C.pixConvertRGBToGray(
+		t.pix,
+		C.l_float32(red), C.l_float32(green), C.l_float32(blue))
+
+	if cPix == nil {
+		return nil, errors.New("cannot create *Pix")
+	}
+
+	pixt := &Pix{pix: cPix}
+
+	runtime.SetFinalizer(pixt, (*Pix).finalize)
+	return pixt, nil
+}
+
+func (t *Pix) ConvertRGBToGrayFast() (*Pix, error) {
+	cPix := C.pixConvertRGBToGrayFast(t.pix)
+
+	if cPix == nil {
+		return nil, errors.New("cannot create *Pix")
+	}
+
+	pixt := &Pix{pix: cPix}
+
+	runtime.SetFinalizer(pixt, (*Pix).finalize)
+	return pixt, nil
+}
+
+func (t *Pix) ConvertRGBToGrayMinMax(grayType GrayChooseType) (*Pix, error) {
+	cPix := C.pixConvertRGBToGrayMinMax(t.pix, C.l_int32(grayType))
+
+	if cPix == nil {
+		return nil, errors.New("cannot create *Pix")
+	}
+
+	pixt := &Pix{pix: cPix}
+
+	runtime.SetFinalizer(pixt, (*Pix).finalize)
+	return pixt, nil
+}
+
 func (t *Pix) PixWrite(path string, format IMGFormat) (error) {
 	cPath := C.CString(path)
 	defer C.free(unsafe.Pointer(cPath))
