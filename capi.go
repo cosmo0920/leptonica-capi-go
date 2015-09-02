@@ -198,6 +198,63 @@ func (t *Pix) ConvertRGBToGrayMinMax(grayType GrayChooseType) (*Pix, error) {
 	return pixt, nil
 }
 
+func (t *Pix) ScaleGrayMinMax(xfact int, yfact int, grayType GrayChooseType) (*Pix, error) {
+	cPix := C.pixScaleGrayMinMax(
+		t.pix,
+		C.l_int32(xfact), C.l_int32(yfact), C.l_int32(grayType))
+
+	if cPix == nil {
+		return nil, errors.New("cannot create *Pix")
+	}
+
+	pixt := &Pix{pix: cPix}
+
+	runtime.SetFinalizer(pixt, (*Pix).finalize)
+	return pixt, nil
+}
+
+func (t *Pix) ScaleGrayMinMax2(grayType GrayChooseType) (*Pix, error) {
+	cPix := C.pixScaleGrayMinMax2(t.pix, C.l_int32(grayType))
+
+	if cPix == nil {
+		return nil, errors.New("cannot create *Pix")
+	}
+
+	pixt := &Pix{pix: cPix}
+
+	runtime.SetFinalizer(pixt, (*Pix).finalize)
+	return pixt, nil
+}
+
+func (t *Pix) ScaleGrayRankCascade(level1 int, level2 int, level3 int, level4 int) (*Pix, error) {
+	cPix := C.pixScaleGrayRankCascade(
+		t.pix,
+		C.l_int32(level1), C.l_int32(level2),
+		C.l_int32(level3), C.l_int32(level4))
+
+	if cPix == nil {
+		return nil, errors.New("cannot create *Pix")
+	}
+
+	pixt := &Pix{pix: cPix}
+
+	runtime.SetFinalizer(pixt, (*Pix).finalize)
+	return pixt, nil
+}
+
+func (t *Pix) Scale(x float32, y float32) (*Pix, error) {
+	cPix := C.pixScale(t.pix, C.l_float32(x), C.l_float32(y))
+
+	if cPix == nil {
+		return nil, errors.New("cannot create *Pix")
+	}
+
+	pixt := &Pix{pix: cPix}
+
+	runtime.SetFinalizer(pixt, (*Pix).finalize)
+	return pixt, nil
+}
+
 func (t *Pix) PixWrite(path string, format IMGFormat) (error) {
 	cPath := C.CString(path)
 	defer C.free(unsafe.Pointer(cPath))
