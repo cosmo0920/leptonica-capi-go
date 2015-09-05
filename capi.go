@@ -41,14 +41,14 @@ const (
 	IFF_SPIX
 )
 
-type GrayChooseType int32
+type GrayChoose int32
 const (
 	L_CHOOSE_MIN = 1 + iota
 	L_CHOOSE_MAX
 	L_CHOOSE_MAX_MIN_DIFF
 )
 
-type ColorMapType int32
+type ColorMap int32
 const (
 	REMOVE_CMAP_TO_BINARY = iota
 	REMOVE_CMAP_TO_GRAYSCALE
@@ -192,8 +192,8 @@ func (t *Pix) ConvertRGBToGrayFast() (*Pix, error) {
 	return pixt, nil
 }
 
-func (t *Pix) ConvertRGBToGrayMinMax(grayType GrayChooseType) (*Pix, error) {
-	cPix := C.pixConvertRGBToGrayMinMax(t.pix, C.l_int32(grayType))
+func (t *Pix) ConvertRGBToGrayMinMax(grayChoose GrayChoose) (*Pix, error) {
+	cPix := C.pixConvertRGBToGrayMinMax(t.pix, C.l_int32(grayChoose))
 
 	if cPix == nil {
 		return nil, errors.New("cannot create *Pix")
@@ -236,10 +236,10 @@ func (t *Pix) ScaleColorLinear(scalex float32, scaley float32) (*Pix, error) {
 	return pixt, nil
 }
 
-func (t *Pix) ScaleGrayMinMax(xfact int, yfact int, grayType GrayChooseType) (*Pix, error) {
+func (t *Pix) ScaleGrayMinMax(xfact int, yfact int, grayChoose GrayChoose) (*Pix, error) {
 	cPix := C.pixScaleGrayMinMax(
 		t.pix,
-		C.l_int32(xfact), C.l_int32(yfact), C.l_int32(grayType))
+		C.l_int32(xfact), C.l_int32(yfact), C.l_int32(grayChoose))
 
 	if cPix == nil {
 		return nil, errors.New("cannot create *Pix")
@@ -251,8 +251,8 @@ func (t *Pix) ScaleGrayMinMax(xfact int, yfact int, grayType GrayChooseType) (*P
 	return pixt, nil
 }
 
-func (t *Pix) ScaleGrayMinMax2(grayType GrayChooseType) (*Pix, error) {
-	cPix := C.pixScaleGrayMinMax2(t.pix, C.l_int32(grayType))
+func (t *Pix) ScaleGrayMinMax2(grayChoose GrayChoose) (*Pix, error) {
+	cPix := C.pixScaleGrayMinMax2(t.pix, C.l_int32(grayChoose))
 
 	if cPix == nil {
 		return nil, errors.New("cannot create *Pix")
@@ -293,7 +293,7 @@ func (t *Pix) Scale(x float32, y float32) (*Pix, error) {
 	return pixt, nil
 }
 
-func (t *Pix) RemoveColormap(colorMap ColorMapType) (*Pix, error) {
+func (t *Pix) RemoveColormap(colorMap ColorMap) (*Pix, error) {
 	cPix := C.pixRemoveColormap(t.pix, C.l_int32(colorMap))
 
 	if cPix == nil {
