@@ -11,7 +11,6 @@ import (
 )
 
 type CopyFlag int32
-
 const (
 	L_INSERT CopyFlag = iota
 	L_COPY
