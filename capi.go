@@ -205,6 +205,37 @@ func (t *Pix) ConvertRGBToGrayMinMax(grayType GrayChooseType) (*Pix, error) {
 	return pixt, nil
 }
 
+func (t *Pix) ScaleGrayLinear(scalex float32, scaley float32) (*Pix, error) {
+	cPix := C.pixScaleGrayLI(
+		t.pix,
+		C.l_float32(scalex), C.l_float32(scaley))
+
+	if cPix == nil {
+		return nil, errors.New("cannot scale gray linear *Pix")
+	}
+
+	pixt := &Pix{pix: cPix}
+
+	runtime.SetFinalizer(pixt, (*Pix).finalize)
+	return pixt, nil
+}
+
+
+func (t *Pix) ScaleColorLinear(scalex float32, scaley float32) (*Pix, error) {
+	cPix := C.pixScaleColorLI(
+		t.pix,
+		C.l_float32(scalex), C.l_float32(scaley))
+
+	if cPix == nil {
+		return nil, errors.New("cannot scale gray linear *Pix")
+	}
+
+	pixt := &Pix{pix: cPix}
+
+	runtime.SetFinalizer(pixt, (*Pix).finalize)
+	return pixt, nil
+}
+
 func (t *Pix) ScaleGrayMinMax(xfact int, yfact int, grayType GrayChooseType) (*Pix, error) {
 	cPix := C.pixScaleGrayMinMax(
 		t.pix,
