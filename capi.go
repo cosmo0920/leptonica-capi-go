@@ -48,6 +48,14 @@ const (
 	L_CHOOSE_MAX_MIN_DIFF
 )
 
+type ColorMapType int32
+const (
+	REMOVE_CMAP_TO_BINARY = iota
+	REMOVE_CMAP_TO_GRAYSCALE
+	REMOVE_CMAP_TO_FULL_COLOR
+	REMOVE_CMAP_BASED_ON_SRC
+)
+
 func Version() string {
 	cVersion := C.getLeptonicaVersion()
 	version := C.GoString(cVersion)
@@ -246,6 +254,19 @@ func (t *Pix) Scale(x float32, y float32) (*Pix, error) {
 
 	if cPix == nil {
 		return nil, errors.New("cannot create *Pix")
+	}
+
+	pixt := &Pix{pix: cPix}
+
+	runtime.SetFinalizer(pixt, (*Pix).finalize)
+	return pixt, nil
+}
+
+func (t *Pix) RemoveColormap(colorMap ColorMapType) (*Pix, error) {
+	cPix := C.pixRemoveColormap(t.pix, C.l_int32(colorMap))
+
+	if cPix == nil {
+		return nil, errors.New("cannot remove color map from *Pix")
 	}
 
 	pixt := &Pix{pix: cPix}
