@@ -6,6 +6,7 @@ package leptonica
 import "C"
 
 type CopyFlag int32
+
 const (
 	L_INSERT CopyFlag = iota
 	L_COPY
@@ -14,6 +15,7 @@ const (
 )
 
 type IMGFormat int32
+
 const (
 	IFF_UNKNOWN IMGFormat = iota
 	IFF_BMP
@@ -37,6 +39,7 @@ const (
 )
 
 type GrayChoose int32
+
 const (
 	L_CHOOSE_MIN = 1 + iota
 	L_CHOOSE_MAX
@@ -44,6 +47,7 @@ const (
 )
 
 type ColorMap int32
+
 const (
 	REMOVE_CMAP_TO_BINARY = iota
 	REMOVE_CMAP_TO_GRAYSCALE
