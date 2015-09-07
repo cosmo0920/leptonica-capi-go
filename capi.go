@@ -33,6 +33,7 @@ func PixRead(filename string) (*Pix, error) {
 	return pix, nil
 }
 
+// private finalize function
 func (t *Pix) finalize() {
 	t.mutex.Lock()
 	defer t.mutex.Unlock()
@@ -234,6 +235,7 @@ func (t *Pix) ScaleGrayRankCascade(level1 int, level2 int, level3 int, level4 in
 	return pixt, nil
 }
 
+// Change Pix Scale with float32 values (x: float32, y: float32)
 func (t *Pix) Scale(x float32, y float32) (*Pix, error) {
 	cPix := C.pixScale(t.pix, C.l_float32(x), C.l_float32(y))
 
@@ -275,6 +277,7 @@ func (t *Pix) ColorSegment(max_dist int, max_color int, sel_size int, final_colo
 	return pixt, nil
 }
 
+// PixWrite :: Ptr Pix -> String -> IMGFormat -> error
 func (t *Pix) PixWrite(path string, format IMGFormat) (error) {
 	cPath := C.CString(path)
 	defer C.free(unsafe.Pointer(cPath))
@@ -288,7 +291,7 @@ func (t *Pix) PixWrite(path string, format IMGFormat) (error) {
 	return nil
 }
 
-// rawPix :: Ptr Pix -> Ptr C.PIX
+// RawPix :: Ptr Pix -> Ptr C.PIX
 func (t *Pix) RawPix() *C.PIX {
 	return t.pix
 }
