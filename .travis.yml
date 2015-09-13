@@ -18,4 +18,5 @@ install:
 script:
   - go build
   - go build example/sample.go
+  - go build example/sample_grayscale.go
   - go test
