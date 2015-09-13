@@ -1,3 +1,4 @@
+#!/bin/bash
 sudo apt-get install zlib1g-dev
 sudo apt-get install libpng12-dev libjpeg62-dev libtiff4-dev libsdl-gfx1.2-dev libsdl-image1.2-dev libsdl1.2-dev libavcodec-dev libavdevice-dev libavformat-dev libavutil-dev
 sudo apt-get install python-enchant python-poppler
