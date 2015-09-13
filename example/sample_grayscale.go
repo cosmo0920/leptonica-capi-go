@@ -12,14 +12,14 @@ func main() {
 	pix, err := lept.PixRead(targetFile)
 
 	if err != nil {
-		fmt.Println("Could not read specified png file.")
+		panic("Could not read specified png file.")
 	}
 
 	fmt.Println("ConvertRGBToGrayFast:", targetFile)
 	tpix, err := pix.ConvertRGBToGrayFast()
 
 	if err != nil {
-		fmt.Println("Could not convert specified pix to grayscale. Panic.")
+		panic("Could not convert specified pix to grayscale.")
 	}
 
 	tpix.PixWrite("Translated.png", lept.IFF_PNG)
