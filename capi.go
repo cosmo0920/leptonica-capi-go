@@ -277,6 +277,17 @@ func (t *Pix) ColorSegment(max_dist int, max_color int, sel_size int, final_colo
 	return pixt, nil
 }
 
+func (t *Pix) PixEqual(dPix *Pix) (bool) {
+	var same C.l_int32
+	C.pixEqual(t.pix, dPix.pix, &same)
+
+	if same == 0 {
+		return true
+	}
+
+	return false
+}
+
 // PixWrite :: Ptr Pix -> String -> IMGFormat -> error
 func (t *Pix) PixWrite(path string, format IMGFormat) (error) {
 	cPath := C.CString(path)
