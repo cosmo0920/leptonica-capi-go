@@ -22,5 +22,11 @@ func main() {
 		panic("Could not convert specified pix to grayscale.")
 	}
 
+	result := pix.PixEqual(tpix)
+
+	if result != true {
+		panic("Suspicious pix conversion.")
+	}
+
 	tpix.PixWrite("Translated3.png", lept.IFF_PNG)
 }
