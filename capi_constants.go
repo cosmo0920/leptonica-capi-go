@@ -54,3 +54,11 @@ const (
 	REMOVE_CMAP_TO_FULL_COLOR
 	REMOVE_CMAP_BASED_ON_SRC
 )
+
+type OrientFlag int32
+
+const (
+	L_HORIZONTAL_EDGES = iota
+	L_VERTICAL_EDGES
+	L_ALL_EDGES
+)

@@ -277,6 +277,33 @@ func (t *Pix) ColorSegment(max_dist int, max_color int, sel_size int, final_colo
 	return pixt, nil
 }
 
+func (t *Pix) SobelEdgeFilter(orient OrientFlag) (*Pix, error) {
+	cPix := C.pixSobelEdgeFilter(t.pix, C.l_int32(orient))
+
+	if cPix == nil {
+		return nil, errors.New("cannot apply sobel edge filter to *Pix")
+	}
+
+	pixt := &Pix{pix: cPix}
+
+	runtime.SetFinalizer(pixt, (*Pix).finalize)
+	return pixt, nil
+}
+
+
+func (t *Pix) TwoSidedEdgeFilter(orient OrientFlag) (*Pix, error) {
+	cPix := C.pixTwoSidedEdgeFilter(t.pix, C.l_int32(orient))
+
+	if cPix == nil {
+		return nil, errors.New("cannot apply two sided edge filter to *Pix")
+	}
+
+	pixt := &Pix{pix: cPix}
+
+	runtime.SetFinalizer(pixt, (*Pix).finalize)
+	return pixt, nil
+}
+
 func (t *Pix) PixEqual(dPix *Pix) (bool) {
 	var same C.l_int32
 	C.pixEqual(t.pix, dPix.pix, &same)
