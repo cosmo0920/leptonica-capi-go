@@ -24,7 +24,7 @@ func main() {
 
 	result := pix.PixEqual(tpix)
 
-	if result != true {
+	if result == true {
 		panic("Suspicious pix conversion.")
 	}
 
