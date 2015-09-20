@@ -308,7 +308,7 @@ func (t *Pix) PixEqual(dPix *Pix) (bool) {
 	var same C.l_int32
 	C.pixEqual(t.pix, dPix.pix, &same)
 
-	if same == 0 {
+	if same == C.TRUE {
 		return true
 	}
 

@@ -22,9 +22,9 @@ func main() {
 		panic("Could not convert specified pix to grayscale.")
 	}
 
-	result := pix.PixEqual(pix)
+	result := pix.PixEqual(tpix)
 
-	if result == true {
+	if result != true {
 		panic("Suspicious pix conversion.")
 	}
 
