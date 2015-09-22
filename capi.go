@@ -45,10 +45,16 @@ func (t *Pix) finalize() {
 	}
 }
 
-func (t *Pix) GetDimension() (int, int) {
+func (t *Pix) GetDimension() (*Dimension, error) {
 	var w, h C.l_int32
-	C.pixGetDimensions(t.pix, &w, &h, nil)
-	return int(w), int(h)
+	result := C.pixGetDimensions(t.pix, &w, &h, nil)
+	dim := &Dimension{int(w), int(h)}
+
+	if result != C.TRUE {
+		return nil, errors.New("cannot get demensions")
+	}
+
+	return dim, nil
 }
 
 func (t *Pix) RankFilterGray(h int, w int, rank float32) (*Pix, error) {

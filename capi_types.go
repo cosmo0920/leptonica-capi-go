@@ -11,3 +11,8 @@ type Pix struct {
 	disposed bool
 	mutex    sync.Mutex
 }
+
+type Dimension struct {
+	w int
+	h int
+}
