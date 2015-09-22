@@ -85,6 +85,21 @@ func TestAddBorder(t *testing.T) {
 	}
 }
 
+func TestRemoveBorder(t *testing.T) {
+	pix := setUp()
+
+	const BORDER_WIDTH = 5
+	bpix := pix.AddBorder(BORDER_WIDTH, 0)
+
+	tpix := bpix.RemoveBorder(BORDER_WIDTH)
+
+	result := tpix.PixEqual(pix)
+
+	if result != true {
+		t.Errorf("Suspisious border operation.")
+	}
+}
+
 func TestSobelEdgeFiter(t *testing.T) {
 	pix := setUp()
 
