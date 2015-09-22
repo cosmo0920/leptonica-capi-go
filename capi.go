@@ -330,6 +330,15 @@ func (t *Pix) AddBorder(npix int, color uint) (*Pix) {
 	return pixt
 }
 
+func (t *Pix) RemoveBorder(npix int) (*Pix) {
+	cPix := C.pixRemoveBorder(t.pix, C.l_int32(npix))
+
+	pixt := &Pix{pix: cPix}
+
+	runtime.SetFinalizer(pixt, (*Pix).finalize)
+	return pixt
+}
+
 // PixWrite :: Ptr Pix -> String -> IMGFormat -> error
 func (t *Pix) PixWrite(path string, format IMGFormat) (error) {
 	cPath := C.CString(path)
