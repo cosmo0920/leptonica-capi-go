@@ -321,6 +321,15 @@ func (t *Pix) PixEqual(dPix *Pix) (bool) {
 	return false
 }
 
+func (t *Pix) AddBoader(npix int, color uint) (*Pix) {
+	cPix := C.pixAddBorder(t.pix, C.l_int32(npix), C.l_uint32(color))
+
+	pixt := &Pix{pix: cPix}
+
+	runtime.SetFinalizer(pixt, (*Pix).finalize)
+	return pixt
+}
+
 // PixWrite :: Ptr Pix -> String -> IMGFormat -> error
 func (t *Pix) PixWrite(path string, format IMGFormat) (error) {
 	cPath := C.CString(path)
