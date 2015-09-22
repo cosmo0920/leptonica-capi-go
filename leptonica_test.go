@@ -48,3 +48,13 @@ func TestConvertRGBToGray(t *testing.T) {
 		t.Errorf("Could not convert specified pix to grayscale.")
 	}
 }
+
+func TestConvertRGBToLuminance(t *testing.T) {
+	pix := setUp()
+
+	_, err := pix.ConvertRGBToLuminance()
+
+	if err != nil {
+		t.Errorf("Could not convert specified pix to grayscale.")
+	}
+}
