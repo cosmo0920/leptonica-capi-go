@@ -7,7 +7,7 @@ import (
 )
 
 func setUp() (*lept.Pix) {
-	targetFile := filepath.Join("example", "伊号潜水艦.png")
+	targetFile := filepath.Join("_example", "伊号潜水艦.png")
 	pix, _ := lept.PixRead(targetFile)
 	return pix;
 }
