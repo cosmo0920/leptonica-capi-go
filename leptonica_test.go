@@ -84,3 +84,20 @@ func TestAddBorder(t *testing.T) {
 		t.Errorf("Suspicious addBorder operation.")
 	}
 }
+
+func TestSobelEdgeFiter(t *testing.T) {
+	pix := setUp()
+
+
+	tpix, err := pix.ConvertRGBToGrayFast()
+
+	if err != nil {
+		t.Errorf("Could not convert specified pix to grayscale.")
+	}
+
+	_, err = tpix.SobelEdgeFilter(lept.L_ALL_EDGES)
+
+	if err != nil {
+		t.Errorf("Could not apply filter to specified pix.")
+	}
+}
