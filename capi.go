@@ -321,7 +321,7 @@ func (t *Pix) PixEqual(dPix *Pix) (bool) {
 	return false
 }
 
-func (t *Pix) AddBoader(npix int, color uint) (*Pix) {
+func (t *Pix) AddBorder(npix int, color uint) (*Pix) {
 	cPix := C.pixAddBorder(t.pix, C.l_int32(npix), C.l_uint32(color))
 
 	pixt := &Pix{pix: cPix}
