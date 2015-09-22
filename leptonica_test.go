@@ -58,3 +58,17 @@ func TestConvertRGBToLuminance(t *testing.T) {
 		t.Errorf("Could not convert specified pix to grayscale.")
 	}
 }
+
+func TestGetDimensions(t *testing.T) {
+	pix := setUp()
+
+	dim, err := pix.ConvertRGBToLuminance()
+
+	if err != nil {
+		t.Errorf("Could not get dimensions from specified pix.")
+	}
+
+	if dim == nil {
+		t.Errorf("Suspicious dimensions.")
+	}
+}
