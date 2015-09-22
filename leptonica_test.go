@@ -72,3 +72,15 @@ func TestGetDimensions(t *testing.T) {
 		t.Errorf("Suspicious dimensions.")
 	}
 }
+
+func TestAddBorder(t *testing.T) {
+	pix := setUp()
+
+	tpix := pix.AddBorder(5, 0)
+
+	result := pix.PixEqual(tpix)
+
+	if result == true {
+		t.Errorf("Suspicious addBorder operation.")
+	}
+}
