@@ -48,7 +48,7 @@ func (t *Pix) finalize() {
 func (t *Pix) GetDimension() (*Dimension, error) {
 	var w, h C.l_int32
 	result := C.pixGetDimensions(t.pix, &w, &h, nil)
-	dim := &Dimension{int(w), int(h)}
+	dim := &Dimension{w: int(w), h: int(h)}
 
 	if result != C.TRUE {
 		return nil, errors.New("cannot get demensions")
