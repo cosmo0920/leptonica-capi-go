@@ -50,7 +50,7 @@ func (t *Pix) GetDimension() (*Dimension, error) {
 	result := C.pixGetDimensions(t.pix, &w, &h, nil)
 	dim := &Dimension{w: int(w), h: int(h)}
 
-	if result != C.TRUE {
+	if result == C.TRUE {
 		return nil, errors.New("cannot get demensions")
 	}
 
