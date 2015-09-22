@@ -140,3 +140,14 @@ func TestTwoSidedEdgeFiter(t *testing.T) {
 		t.Errorf("Suspisious applying two sided filter.")
 	}
 }
+
+func TestScale(t *testing.T) {
+	pix := setUp()
+
+	_, err := pix.Scale(2.0, 2.0)
+
+
+	if err != nil {
+		t.Errorf("Could not scale operation.")
+	}
+}
