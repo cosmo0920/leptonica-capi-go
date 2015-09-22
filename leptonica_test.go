@@ -62,7 +62,7 @@ func TestConvertRGBToLuminance(t *testing.T) {
 func TestGetDimensions(t *testing.T) {
 	pix := setUp()
 
-	dim, err := pix.ConvertRGBToLuminance()
+	dim, err := pix.GetDimension()
 
 	if err != nil {
 		t.Errorf("Could not get dimensions from specified pix.")
