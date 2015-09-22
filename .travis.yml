@@ -19,4 +19,7 @@ script:
   - go build
   - go build _example/sample.go
   - go build _example/sample_grayscale.go
+  - go build _example/sample_grayscale2.go
+  - go build _example/sample_grayscale3.go
+  - go build _example/sample_grayscale4.go
   - go test
