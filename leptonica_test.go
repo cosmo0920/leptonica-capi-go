@@ -116,3 +116,27 @@ func TestSobelEdgeFiter(t *testing.T) {
 		t.Errorf("Could not apply filter to specified pix.")
 	}
 }
+
+
+func TestTwoSidedEdgeFiter(t *testing.T) {
+	pix := setUp()
+
+
+	tpix, err := pix.ConvertRGBToGrayFast()
+
+	if err != nil {
+		t.Errorf("Could not convert specified pix to grayscale.")
+	}
+
+	_, err = tpix.TwoSidedEdgeFilter(lept.L_VERTICAL_EDGES)
+
+	if err != nil {
+		t.Errorf("Could not apply filter to specified pix.")
+	}
+
+	_, err = tpix.TwoSidedEdgeFilter(lept.L_ALL_EDGES)
+
+	if err == nil {
+		t.Errorf("Suspisious applying two sided filter.")
+	}
+}
