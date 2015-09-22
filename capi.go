@@ -296,7 +296,6 @@ func (t *Pix) SobelEdgeFilter(orient OrientFlag) (*Pix, error) {
 	return pixt, nil
 }
 
-
 func (t *Pix) TwoSidedEdgeFilter(orient OrientFlag) (*Pix, error) {
 	cPix := C.pixTwoSidedEdgeFilter(t.pix, C.l_int32(orient))
 
