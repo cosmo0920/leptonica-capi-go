@@ -19,6 +19,16 @@ func TestVersion(t *testing.T) {
 	}
 }
 
+func TestPixRead(t *testing.T) {
+	targetFile := filepath.Join("_example", "伊号潜水艦.png")
+	_, err := lept.PixRead(targetFile)
+
+	if err != nil {
+		t.Errorf("Could not read pix from specified img file.")
+	}
+
+}
+
 func TestConvertRGBToGrayFast(t *testing.T) {
 	pix := setUp()
 
