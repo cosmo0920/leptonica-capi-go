@@ -141,6 +141,17 @@ func TestTwoSidedEdgeFiter(t *testing.T) {
 	}
 }
 
+func TestRemoveColorMap(t *testing.T) {
+	pix := setUp()
+
+	_, err := pix.RemoveColormap(lept.REMOVE_CMAP_TO_GRAYSCALE)
+
+
+	if err != nil {
+		t.Errorf("Could not scale operation.")
+	}
+}
+
 func TestScale(t *testing.T) {
 	pix := setUp()
 
