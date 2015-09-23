@@ -319,6 +319,16 @@ func (t *Pix) PixEqual(dPix *Pix) bool {
 	return false
 }
 
+func (t *Pix) PixDisplay(x int, y int) error {
+	result := C.pixDisplay(t.pix, C.l_int32(x), C.l_int32(y))
+
+	if result == C.TRUE {
+		return errors.New("Could not display specified pix.")
+	}
+
+	return nil
+}
+
 func (t *Pix) AddBorder(npix int, color uint) *Pix {
 	cPix := C.pixAddBorder(t.pix, C.l_int32(npix), C.l_uint32(color))
 
