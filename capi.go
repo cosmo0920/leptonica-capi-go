@@ -319,6 +319,15 @@ func (t *Pix) PixEqual(dPix *Pix) bool {
 	return false
 }
 
+func (t *Pix) PixCopy() *Pix {
+	cPix := C.pixCopy(nil, t.pix)
+
+	pixt := &Pix{pix: cPix}
+
+	runtime.SetFinalizer(pixt, (*Pix).finalize)
+	return pixt
+}
+
 func (t *Pix) PixDisplay(x int, y int) error {
 	result := C.pixDisplay(t.pix, C.l_int32(x), C.l_int32(y))
 

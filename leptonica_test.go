@@ -43,6 +43,18 @@ func TestPixWrite(t *testing.T) {
 	}
 }
 
+func TestPixCopy(t *testing.T) {
+	pix := setUp()
+
+	cpix := pix.PixCopy()
+
+	result := pix.PixEqual(cpix)
+
+	if result != true {
+		t.Errorf("Suspisious copy operation.")
+	}
+}
+
 func TestConvertRGBToGrayFast(t *testing.T) {
 	pix := setUp()
 
