@@ -345,7 +345,7 @@ func (t *Pix) PixWrite(path string, format IMGFormat) (error) {
 
 	result := C.pixWrite(cPath, t.pix, C.l_int32(format))
 
-	if result == 0 {
+	if result == C.TRUE {
 		return errors.New("cannot write *Pix")
 	}
 
