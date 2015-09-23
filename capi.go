@@ -181,7 +181,6 @@ func (t *Pix) ScaleGrayLinear(scalex float32, scaley float32) (*Pix, error) {
 	return pixt, nil
 }
 
-
 func (t *Pix) ScaleColorLinear(scalex float32, scaley float32) (*Pix, error) {
 	cPix := C.pixScaleColorLI(
 		t.pix,
@@ -309,7 +308,7 @@ func (t *Pix) TwoSidedEdgeFilter(orient OrientFlag) (*Pix, error) {
 	return pixt, nil
 }
 
-func (t *Pix) PixEqual(dPix *Pix) (bool) {
+func (t *Pix) PixEqual(dPix *Pix) bool {
 	var same C.l_int32
 	C.pixEqual(t.pix, dPix.pix, &same)
 
@@ -320,7 +319,7 @@ func (t *Pix) PixEqual(dPix *Pix) (bool) {
 	return false
 }
 
-func (t *Pix) AddBorder(npix int, color uint) (*Pix) {
+func (t *Pix) AddBorder(npix int, color uint) *Pix {
 	cPix := C.pixAddBorder(t.pix, C.l_int32(npix), C.l_uint32(color))
 
 	pixt := &Pix{pix: cPix}
@@ -329,7 +328,7 @@ func (t *Pix) AddBorder(npix int, color uint) (*Pix) {
 	return pixt
 }
 
-func (t *Pix) RemoveBorder(npix int) (*Pix) {
+func (t *Pix) RemoveBorder(npix int) *Pix {
 	cPix := C.pixRemoveBorder(t.pix, C.l_int32(npix))
 
 	pixt := &Pix{pix: cPix}
@@ -339,7 +338,7 @@ func (t *Pix) RemoveBorder(npix int) (*Pix) {
 }
 
 // PixWrite :: Ptr Pix -> String -> IMGFormat -> error
-func (t *Pix) PixWrite(path string, format IMGFormat) (error) {
+func (t *Pix) PixWrite(path string, format IMGFormat) error {
 	cPath := C.CString(path)
 	defer C.free(unsafe.Pointer(cPath))
 

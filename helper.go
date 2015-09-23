@@ -1,4 +1,5 @@
 package leptonica
+
 // #include <leptonica/allheaders.h>
 //
 // l_int32 getNumberOfBox(BOXA* boxa) {

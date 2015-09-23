@@ -7,10 +7,10 @@ import (
 	"testing"
 )
 
-func setUp() (*lept.Pix) {
+func setUp() *lept.Pix {
 	targetFile := filepath.Join("_example", "伊号潜水艦.png")
 	pix, _ := lept.PixRead(targetFile)
-	return pix;
+	return pix
 }
 
 func TestVersion(t *testing.T) {
@@ -142,7 +142,6 @@ func TestSobelEdgeFiter(t *testing.T) {
 
 func TestTwoSidedEdgeFiter(t *testing.T) {
 	pix := setUp()
-
 
 	tpix, err := pix.ConvertRGBToGrayFast()
 
