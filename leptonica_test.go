@@ -2,6 +2,7 @@ package leptonica_test
 
 import (
 	lept "github.com/cosmo0920/leptonica-capi-go"
+	"io/ioutil"
 	"path/filepath"
 	"testing"
 )
@@ -27,6 +28,19 @@ func TestPixRead(t *testing.T) {
 		t.Errorf("Could not read pix from specified img file.")
 	}
 
+}
+
+func TestPixWrite(t *testing.T) {
+	pix := setUp()
+
+	tmpDir, _ := ioutil.TempDir("", "temp-lept")
+	tmpFilename := filepath.Join(tmpDir, "pixWrite.png")
+
+	err := pix.PixWrite(tmpFilename, lept.IFF_PNG)
+
+	if err != nil {
+		t.Errorf("Could not write specified pix contents.")
+	}
 }
 
 func TestConvertRGBToGrayFast(t *testing.T) {
