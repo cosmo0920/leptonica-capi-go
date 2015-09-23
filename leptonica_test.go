@@ -113,7 +113,6 @@ func TestRemoveBorder(t *testing.T) {
 func TestSobelEdgeFiter(t *testing.T) {
 	pix := setUp()
 
-
 	tpix, err := pix.ConvertRGBToGrayFast()
 
 	if err != nil {
@@ -126,7 +125,6 @@ func TestSobelEdgeFiter(t *testing.T) {
 		t.Errorf("Could not apply filter to specified pix.")
 	}
 }
-
 
 func TestTwoSidedEdgeFiter(t *testing.T) {
 	pix := setUp()
@@ -156,7 +154,6 @@ func TestRemoveColorMap(t *testing.T) {
 
 	_, err := pix.RemoveColormap(lept.REMOVE_CMAP_TO_GRAYSCALE)
 
-
 	if err != nil {
 		t.Errorf("Could not scale operation.")
 	}
@@ -166,7 +163,6 @@ func TestScale(t *testing.T) {
 	pix := setUp()
 
 	_, err := pix.Scale(2.0, 2.0)
-
 
 	if err != nil {
 		t.Errorf("Could not scale operation.")
