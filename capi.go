@@ -308,6 +308,34 @@ func (t *Pix) TwoSidedEdgeFilter(orient OrientFlag) (*Pix, error) {
 	return pixt, nil
 }
 
+func (t *Pix) ConvertTo8(flag ColorMapFlag) *Pix {
+	cPix := C.pixConvertTo8(t.pix, C.l_int32(flag))
+
+	pixt := &Pix{pix: cPix}
+
+	runtime.SetFinalizer(pixt, (*Pix).finalize)
+	return pixt
+}
+
+// Note that input Pix depth is required 1bpp or 8bpp.
+func (t *Pix) ConvertTo16() *Pix {
+	cPix := C.pixConvertTo16(t.pix)
+
+	pixt := &Pix{pix: cPix}
+
+	runtime.SetFinalizer(pixt, (*Pix).finalize)
+	return pixt
+}
+
+func (t *Pix) ConvertTo32() *Pix {
+	cPix := C.pixConvertTo32(t.pix)
+
+	pixt := &Pix{pix: cPix}
+
+	runtime.SetFinalizer(pixt, (*Pix).finalize)
+	return pixt
+}
+
 func (t *Pix) PixEqual(dPix *Pix) bool {
 	var same C.l_int32
 	C.pixEqual(t.pix, dPix.pix, &same)

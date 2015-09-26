@@ -62,3 +62,10 @@ const (
 	L_VERTICAL_EDGES
 	L_ALL_EDGES
 )
+
+type ColorMapFlag int32
+
+const (
+	HAS_COLOR_MAP = C.TRUE
+	NONE          = C.FALSE
+)

@@ -174,6 +174,52 @@ func TestTwoSidedEdgeFiter(t *testing.T) {
 	}
 }
 
+func TestConvertTo8(t *testing.T) {
+	pix := setUp()
+
+	tpix := pix.ConvertTo8(lept.HAS_COLOR_MAP)
+
+	if tpix.RawPix() == nil {
+		t.Errorf("Could not convert specified pix to 8bpp.")
+	}
+
+}
+
+func TestConvertTo16(t *testing.T) {
+	pix := setUp()
+
+	pix8 := pix.ConvertTo8(lept.HAS_COLOR_MAP)
+
+	tpix := pix8.ConvertTo16()
+
+	if tpix.RawPix() == nil {
+		t.Errorf("Could not convert specified pix to 16bpp.")
+	}
+
+}
+
+func TestConvertTo16WithInvalidPix(t *testing.T) {
+	pix := setUp()
+
+	tpix := pix.ConvertTo16()
+
+	if tpix.RawPix() != nil {
+		t.Errorf("Suspisious ConvertTo16 operation detected.")
+	}
+
+}
+
+func TestConvertTo32(t *testing.T) {
+	pix := setUp()
+
+	tpix := pix.ConvertTo32()
+
+	if tpix.RawPix() == nil {
+		t.Errorf("Could not convert specified pix to 32bpp.")
+	}
+
+}
+
 func TestRemoveColorMap(t *testing.T) {
 	pix := setUp()
 
