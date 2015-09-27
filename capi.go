@@ -434,6 +434,37 @@ func (t *Box) finalize() {
 	}
 }
 
+func BoxaCreate(num int) *Boxa {
+	cBoxa := C.boxaCreate(C.l_int32(num))
+
+	boxa := &Boxa{boxa: cBoxa}
+
+	runtime.SetFinalizer(boxa, (*Boxa).finalize)
+	return boxa
+}
+
+// private boxa finalize function
+func (t *Boxa) finalize() {
+	t.mutex.Lock()
+	defer t.mutex.Unlock()
+
+	if !t.disposed {
+		C.boxaDestroy(&t.boxa)
+		C.free(unsafe.Pointer(t.boxa))
+		t.disposed = true
+	}
+}
+
+// GetBox :: Ptr Boxa -> int32 -> int32 -> Ptr Boxa
+func (t *Boxa) GetBox(index int32, flag CopyFlag) *Box {
+	cBox := C.boxaGetBox(t.boxa, C.l_int32(index), C.l_int32(flag))
+
+	box := &Box{box: cBox}
+
+	runtime.SetFinalizer(box, (*Box).finalize)
+	return box
+}
+
 // BoxaGetBox :: Ptr Boxa -> int32 -> int32 -> Ptr C.BOX
 func BoxaGetBox(t *C.BOXA, index int32, flag CopyFlag) *C.BOX {
 	return C.boxaGetBox(t, C.l_int32(index), C.l_int32(flag))

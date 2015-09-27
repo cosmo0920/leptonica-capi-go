@@ -22,3 +22,9 @@ type Box struct {
 	disposed bool
 	mutex    sync.Mutex
 }
+
+type Boxa struct {
+	boxa     *C.BOXA
+	disposed bool
+	mutex    sync.Mutex
+}
