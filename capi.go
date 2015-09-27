@@ -412,14 +412,18 @@ func (t *Pix) RawPix() *C.PIX {
 	return t.pix
 }
 
-func BoxCreate(x int, y int, w int, h int) *Box {
+func BoxCreate(x int, y int, w int, h int) (*Box, error) {
 	cBox := C.boxCreate(C.l_int32(x), C.l_int32(y),
 		C.l_int32(w), C.l_int32(h))
+
+	if cBox == nil {
+		return nil, errors.New("cannot create *Box")
+	}
 
 	box := &Box{box: cBox}
 
 	runtime.SetFinalizer(box, (*Box).finalize)
-	return box
+	return box, nil
 }
 
 // private box finalize function
@@ -434,13 +438,17 @@ func (t *Box) finalize() {
 	}
 }
 
-func BoxaCreate(num int) *Boxa {
+func BoxaCreate(num int) (*Boxa, error) {
 	cBoxa := C.boxaCreate(C.l_int32(num))
+
+	if cBoxa == nil {
+		return nil, errors.New("cannot create *Boxa")
+	}
 
 	boxa := &Boxa{boxa: cBoxa}
 
 	runtime.SetFinalizer(boxa, (*Boxa).finalize)
-	return boxa
+	return boxa, nil
 }
 
 // private boxa finalize function

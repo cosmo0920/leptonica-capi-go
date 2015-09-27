@@ -271,3 +271,19 @@ func TestScale(t *testing.T) {
 		t.Errorf("Could not scale operation.")
 	}
 }
+
+func TestBoxCreate(t *testing.T) {
+	_, err := lept.BoxCreate(60, 60, 40, 20)
+
+	if err != nil {
+		t.Errorf("Could not create box.")
+	}
+}
+
+func TestBoxaCreate(t *testing.T) {
+	_, err := lept.BoxaCreate(3)
+
+	if err != nil {
+		t.Errorf("Could not create boxa(s).")
+	}
+}
