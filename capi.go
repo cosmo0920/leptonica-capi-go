@@ -33,7 +33,7 @@ func PixRead(filename string) (*Pix, error) {
 	return pix, nil
 }
 
-// private finalize function
+// private pix finalize function
 func (t *Pix) finalize() {
 	t.mutex.Lock()
 	defer t.mutex.Unlock()
