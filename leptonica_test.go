@@ -177,21 +177,21 @@ func TestTwoSidedEdgeFiter(t *testing.T) {
 func TestConvertTo1(t *testing.T) {
 	pix := setUp()
 
-	tpix := pix.ConvertTo1(0)
+	tpix, err := pix.ConvertTo1(0)
 
-	if tpix.RawPix() == nil {
+	if err != nil || tpix.RawPix() == nil {
 		t.Errorf("Could not convert specified pix to 1bpp(binary).")
 	}
 
-	tpix = pix.ConvertTo1(220)
+	tpix, err = pix.ConvertTo1(220)
 
-	if tpix.RawPix() == nil {
+	if err != nil || tpix.RawPix() == nil {
 		t.Errorf("Could not convert specified pix to 1bpp(binary).")
 	}
 
-	tpix = pix.ConvertTo1(256)
+	tpix, err = pix.ConvertTo1(256)
 
-	if tpix.RawPix() == nil {
+	if err != nil || tpix.RawPix() == nil {
 		t.Errorf("Could not convert specified pix to 1bpp(binary).")
 	}
 }
@@ -199,10 +199,10 @@ func TestConvertTo1(t *testing.T) {
 func TestConvertTo1WithInvalidThreshold(t *testing.T) {
 	pix := setUp()
 
-	tpix := pix.ConvertTo1(300)
+	_, err := pix.ConvertTo1(300)
 
-	if tpix.RawPix() != nil {
-		t.Errorf("Suspisous convertTo1 operation.")
+	if err == nil {
+		t.Errorf("Suspisous convertTo1 operation. [What] %v", err)
 	}
 }
 
@@ -269,6 +269,16 @@ func TestScale(t *testing.T) {
 
 	if err != nil {
 		t.Errorf("Could not scale operation.")
+	}
+}
+
+func TestScaleWithInvalid(t *testing.T) {
+	pix := setUp()
+
+	_, err := pix.Scale(-2.0, -2.0)
+
+	if err == nil {
+		t.Errorf("Suspicious scale operation. [What] %v", err)
 	}
 }
 

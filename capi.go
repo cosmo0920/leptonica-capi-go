@@ -242,6 +242,10 @@ func (t *Pix) ScaleGrayRankCascade(level1 int, level2 int, level3 int, level4 in
 
 // Change Pix Scale with float32 values (x: float32, y: float32)
 func (t *Pix) Scale(x float32, y float32) (*Pix, error) {
+	if x < 0 || y < 0 {
+		return nil, errors.New("cannot specify negative value to scale factor.")
+	}
+
 	cPix := C.pixScale(t.pix, C.l_float32(x), C.l_float32(y))
 
 	if cPix == nil {
@@ -296,6 +300,10 @@ func (t *Pix) SobelEdgeFilter(orient OrientFlag) (*Pix, error) {
 }
 
 func (t *Pix) TwoSidedEdgeFilter(orient OrientFlag) (*Pix, error) {
+	if orient == L_ALL_EDGES {
+		return nil, errors.New("could not specify this orient flag.")
+	}
+
 	cPix := C.pixTwoSidedEdgeFilter(t.pix, C.l_int32(orient))
 
 	if cPix == nil {
@@ -308,13 +316,17 @@ func (t *Pix) TwoSidedEdgeFilter(orient OrientFlag) (*Pix, error) {
 	return pixt, nil
 }
 
-func (t *Pix) ConvertTo1(threshold int) *Pix {
+func (t *Pix) ConvertTo1(threshold uint16) (*Pix, error) {
+	if threshold > 256 {
+		return nil, errors.New("threshold should be [0-256].")
+	}
+
 	cPix := C.pixConvertTo1(t.pix, C.l_int32(threshold))
 
 	pixt := &Pix{pix: cPix}
 
 	runtime.SetFinalizer(pixt, (*Pix).finalize)
-	return pixt
+	return pixt, nil
 }
 
 func (t *Pix) ConvertTo8(flag ColorMapFlag) *Pix {
