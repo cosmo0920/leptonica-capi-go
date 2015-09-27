@@ -16,3 +16,9 @@ type Dimension struct {
 	Wide   int
 	Height int
 }
+
+type Box struct {
+	box      *C.BOX
+	disposed bool
+	mutex    sync.Mutex
+}

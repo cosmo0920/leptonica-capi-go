@@ -412,6 +412,28 @@ func (t *Pix) RawPix() *C.PIX {
 	return t.pix
 }
 
+func BoxCreate(x int, y int, w int, h int) *Box {
+	cBox := C.boxCreate(C.l_int32(x), C.l_int32(y),
+		C.l_int32(w), C.l_int32(h))
+
+	box := &Box{box: cBox}
+
+	runtime.SetFinalizer(box, (*Box).finalize)
+	return box
+}
+
+// private box finalize function
+func (t *Box) finalize() {
+	t.mutex.Lock()
+	defer t.mutex.Unlock()
+
+	if !t.disposed {
+		C.boxDestroy(&t.box)
+		C.free(unsafe.Pointer(t.box))
+		t.disposed = true
+	}
+}
+
 // BoxaGetBox :: Ptr Boxa -> int32 -> int32 -> Ptr C.BOX
 func BoxaGetBox(t *C.BOXA, index int32, flag CopyFlag) *C.BOX {
 	return C.boxaGetBox(t, C.l_int32(index), C.l_int32(flag))
