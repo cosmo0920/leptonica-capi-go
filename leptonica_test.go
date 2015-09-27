@@ -174,6 +174,38 @@ func TestTwoSidedEdgeFiter(t *testing.T) {
 	}
 }
 
+func TestConvertTo1(t *testing.T) {
+	pix := setUp()
+
+	tpix := pix.ConvertTo1(0)
+
+	if tpix.RawPix() == nil {
+		t.Errorf("Could not convert specified pix to 1bpp(binary).")
+	}
+
+	tpix = pix.ConvertTo1(220)
+
+	if tpix.RawPix() == nil {
+		t.Errorf("Could not convert specified pix to 1bpp(binary).")
+	}
+
+	tpix = pix.ConvertTo1(256)
+
+	if tpix.RawPix() == nil {
+		t.Errorf("Could not convert specified pix to 1bpp(binary).")
+	}
+}
+
+func TestConvertTo1WithInvalidThreshold(t *testing.T) {
+	pix := setUp()
+
+	tpix := pix.ConvertTo1(300)
+
+	if tpix.RawPix() != nil {
+		t.Errorf("Suspisous convertTo1 operation.")
+	}
+}
+
 func TestConvertTo8(t *testing.T) {
 	pix := setUp()
 

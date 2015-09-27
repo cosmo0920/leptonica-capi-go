@@ -308,6 +308,15 @@ func (t *Pix) TwoSidedEdgeFilter(orient OrientFlag) (*Pix, error) {
 	return pixt, nil
 }
 
+func (t *Pix) ConvertTo1(threshold int) *Pix {
+	cPix := C.pixConvertTo1(t.pix, C.l_int32(threshold))
+
+	pixt := &Pix{pix: cPix}
+
+	runtime.SetFinalizer(pixt, (*Pix).finalize)
+	return pixt
+}
+
 func (t *Pix) ConvertTo8(flag ColorMapFlag) *Pix {
 	cPix := C.pixConvertTo8(t.pix, C.l_int32(flag))
 
