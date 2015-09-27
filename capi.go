@@ -405,6 +405,12 @@ func (t *Pix) RemoveBorder(npix int) *Pix {
 	return pixt
 }
 
+func (t *Pix) GetDepth() int {
+	cDepth := C.pixGetDepth(t.pix)
+
+	return int(cDepth)
+}
+
 // PixWrite :: Ptr Pix -> String -> IMGFormat -> error
 func (t *Pix) PixWrite(path string, format IMGFormat) error {
 	cPath := C.CString(path)

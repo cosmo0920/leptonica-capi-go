@@ -136,6 +136,16 @@ func TestRemoveBorder(t *testing.T) {
 	}
 }
 
+func TestGetDepth(t *testing.T) {
+	pix := setUp()
+
+	depth := pix.GetDepth()
+
+	if depth < 1 {
+		t.Errorf("Suspisious getting depth operation. depth: %v", depth)
+	}
+}
+
 func TestSobelEdgeFiter(t *testing.T) {
 	pix := setUp()
 
