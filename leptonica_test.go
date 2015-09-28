@@ -176,6 +176,12 @@ func TestTwoSidedEdgeFiter(t *testing.T) {
 	if err != nil {
 		t.Errorf("Could not apply filter to specified pix.")
 	}
+}
+
+func TestTwoSidedEdgeFiterWithInvalidFilterOption(t *testing.T) {
+	pix := setUp()
+
+	tpix, err := pix.ConvertRGBToGrayFast()
 
 	_, err = tpix.TwoSidedEdgeFilter(lept.L_ALL_EDGES)
 
