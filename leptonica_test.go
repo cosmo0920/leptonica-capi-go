@@ -149,13 +149,13 @@ func TestGetDepth(t *testing.T) {
 func TestSobelEdgeFiter(t *testing.T) {
 	pix := setUp()
 
-	tpix, err := pix.ConvertRGBToGrayFast()
+	tpix := pix.ConvertTo8(lept.HAS_COLOR_MAP)
 
-	if err != nil {
-		t.Errorf("Could not convert specified pix to grayscale.")
+	if tpix.RawPix() == nil {
+		t.Errorf("Could not convert specified pix to 8bpp.")
 	}
 
-	_, err = tpix.SobelEdgeFilter(lept.L_ALL_EDGES)
+	_, err := tpix.SobelEdgeFilter(lept.L_ALL_EDGES)
 
 	if err != nil {
 		t.Errorf("Could not apply filter to specified pix.")
@@ -165,13 +165,13 @@ func TestSobelEdgeFiter(t *testing.T) {
 func TestTwoSidedEdgeFiter(t *testing.T) {
 	pix := setUp()
 
-	tpix, err := pix.ConvertRGBToGrayFast()
+	tpix := pix.ConvertTo8(lept.HAS_COLOR_MAP)
 
-	if err != nil {
-		t.Errorf("Could not convert specified pix to grayscale.")
+	if tpix.RawPix() == nil {
+		t.Errorf("Could not convert specified pix to 8bpp.")
 	}
 
-	_, err = tpix.TwoSidedEdgeFilter(lept.L_VERTICAL_EDGES)
+	_, err := tpix.TwoSidedEdgeFilter(lept.L_VERTICAL_EDGES)
 
 	if err != nil {
 		t.Errorf("Could not apply filter to specified pix.")
@@ -181,9 +181,13 @@ func TestTwoSidedEdgeFiter(t *testing.T) {
 func TestTwoSidedEdgeFiterWithInvalidFilterOption(t *testing.T) {
 	pix := setUp()
 
-	tpix, err := pix.ConvertRGBToGrayFast()
+	tpix := pix.ConvertTo8(lept.HAS_COLOR_MAP)
 
-	_, err = tpix.TwoSidedEdgeFilter(lept.L_ALL_EDGES)
+	if tpix.RawPix() == nil {
+		t.Errorf("Could not convert specified pix to 8bpp.")
+	}
+
+	_, err := tpix.TwoSidedEdgeFilter(lept.L_ALL_EDGES)
 
 	if err == nil {
 		t.Errorf("Suspisious applying two sided filter.")
