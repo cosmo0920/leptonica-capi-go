@@ -95,7 +95,7 @@ func TestConvertRGBToLuminance(t *testing.T) {
 	}
 }
 
-func TestGetDimensions(t *testing.T) {
+func TestGetDimension(t *testing.T) {
 	pix := setUp()
 
 	dim, err := pix.GetDimension()
