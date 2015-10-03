@@ -326,20 +326,20 @@ func ExampleConvertRGBToGrayFast() {
 	pix, err := lept.PixRead(targetFile)
 
 	if err != nil {
-		t.Errorf("Could not read specified png file.")
+		panic("Could not read specified png file.")
 	}
 
 	fmt.Println("ConvertRGBToGrayFast:", targetFile)
 	tpix, err := pix.ConvertRGBToGrayFast()
 
 	if err != nil {
-		t.Errorf("Could not convert specified pix to grayscale.")
+		panic("Could not convert specified pix to grayscale.")
 	}
 
 	result := pix.PixEqual(tpix)
 
 	if result == true {
-		t.Errorf("Suspicious pix conversion.")
+		panic("Suspicious pix conversion.")
 	}
 
 	tmpDir, _ := ioutil.TempDir("", "temp-lept")
@@ -357,20 +357,20 @@ func ExampleConvertRGBToGrayMinMax() {
 	pix, err := lept.PixRead(targetFile)
 
 	if err != nil {
-		t.Errorf("Could not read specified png file.")
+		panic("Could not read specified png file.")
 	}
 
 	fmt.Println("ConvertRGBToGrayMinMax:", targetFile)
 	tpix, err := pix.ConvertRGBToGrayMinMax(lept.L_CHOOSE_MAX)
 
 	if err != nil {
-		t.Errorf("Could not convert specified pix to grayscale.")
+		panic("Could not convert specified pix to grayscale.")
 	}
 
 	result := pix.PixEqual(tpix)
 
 	if result == true {
-		t.Errorf("Suspicious pix conversion.")
+		panic("Suspicious pix conversion.")
 	}
 
 	tmpDir, _ := ioutil.TempDir("", "temp-lept")
@@ -388,20 +388,20 @@ func ExampleConvertRGBToGray() {
 	pix, err := lept.PixRead(targetFile)
 
 	if err != nil {
-		t.Errorf("Could not read specified png file.")
+		panic("Could not read specified png file.")
 	}
 
 	fmt.Println("ConvertRGBToGray:", targetFile)
 	tpix, err := pix.ConvertRGBToGray(0.35, 0.35, 0.3)
 
 	if err != nil {
-		t.Errorf("Could not convert specified pix to grayscale.")
+		panic("Could not convert specified pix to grayscale.")
 	}
 
 	result := pix.PixEqual(tpix)
 
 	if result == true {
-		t.Errorf("Suspicious pix conversion.")
+		panic("Suspicious pix conversion.")
 	}
 
 	tmpDir, _ := ioutil.TempDir("", "temp-lept")
@@ -419,20 +419,20 @@ func ExampleConvertRGBToLuminance() {
 	pix, err := lept.PixRead(targetFile)
 
 	if err != nil {
-		t.Errorf("Could not read specified png file.")
+		panic("Could not read specified png file.")
 	}
 
 	fmt.Println("ConvertRGBToLuminance:", targetFile)
 	tpix, err := pix.ConvertRGBToLuminance()
 
 	if err != nil {
-		t.Errorf("Could not convert specified pix to grayscale.")
+		panic("Could not convert specified pix to grayscale.")
 	}
 
 	result := pix.PixEqual(tpix)
 
 	if result == true {
-		t.Errorf("Suspicious pix conversion.")
+		panic("Suspicious pix conversion.")
 	}
 
 	tmpDir, _ := ioutil.TempDir("", "temp-lept")
@@ -450,27 +450,27 @@ func ExampleSobelEdgeFilter() {
 	pix, err := lept.PixRead(targetFile)
 
 	if err != nil {
-		t.Errorf("Could not read specified png file.")
+		panic("Could not read specified png file.")
 	}
 
 	fmt.Println("ConvertTo8:", targetFile)
 	tpix := pix.ConvertTo8(lept.HAS_COLOR_MAP)
 
 	if tpix.RawPix() == nil {
-		t.Errorf("Could not convert specified pix to 8bpp.")
+		panic("Could not convert specified pix to 8bpp.")
 	}
 
 	result := pix.PixEqual(tpix)
 
 	if result == true {
-		t.Errorf("Suspicious pix conversion.")
+		panic("Suspicious pix conversion.")
 	}
 
 	fmt.Println("Apply SobelEdgeFilter:", targetFile)
 	epix, err := tpix.SobelEdgeFilter(lept.L_ALL_EDGES)
 
 	if err != nil {
-		t.Errorf("Could not apply sobelEdgeFilter to pix.")
+		panic("Could not apply sobelEdgeFilter to pix.")
 	}
 	tmpDir, _ := ioutil.TempDir("", "temp-lept")
 	tmpFilename := filepath.Join(tmpDir, "appliedSobelFilter.png")
