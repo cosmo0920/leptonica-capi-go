@@ -320,8 +320,6 @@ func TestBoxaCreate(t *testing.T) {
 }
 
 func ExampleConvertRGBToGrayFast() {
-	version := lept.Version()
-	fmt.Println("leptonica version: " + version)
 	targetFile := filepath.Join("_example", "伊号潜水艦.png")
 	pix, err := lept.PixRead(targetFile)
 
@@ -346,13 +344,10 @@ func ExampleConvertRGBToGrayFast() {
 	tmpFilename := filepath.Join(tmpDir, "translateGrayscale.png")
 	tpix.PixWrite(tmpFilename, lept.IFF_PNG)
 	// Output:
-	// leptonica version: leptonica-1.72
 	// ConvertRGBToGrayFast: _example/伊号潜水艦.png
 }
 
 func ExampleConvertRGBToGrayMinMax() {
-	version := lept.Version()
-	fmt.Println("leptonica version: " + version)
 	targetFile := filepath.Join("_example", "伊号潜水艦.png")
 	pix, err := lept.PixRead(targetFile)
 
@@ -377,13 +372,10 @@ func ExampleConvertRGBToGrayMinMax() {
 	tmpFilename := filepath.Join(tmpDir, "translateGrayscale2.png")
 	tpix.PixWrite(tmpFilename, lept.IFF_PNG)
 	// Output:
-	// leptonica version: leptonica-1.72
 	// ConvertRGBToGrayMinMax: _example/伊号潜水艦.png
 }
 
 func ExampleConvertRGBToGray() {
-	version := lept.Version()
-	fmt.Println("leptonica version: " + version)
 	targetFile := filepath.Join("_example", "伊号潜水艦.png")
 	pix, err := lept.PixRead(targetFile)
 
@@ -408,13 +400,10 @@ func ExampleConvertRGBToGray() {
 	tmpFilename := filepath.Join(tmpDir, "translateGrayscale3.png")
 	tpix.PixWrite(tmpFilename, lept.IFF_PNG)
 	// Output:
-	// leptonica version: leptonica-1.72
 	// ConvertRGBToGray: _example/伊号潜水艦.png
 }
 
 func ExampleConvertRGBToLuminance() {
-	version := lept.Version()
-	fmt.Println("leptonica version: " + version)
 	targetFile := filepath.Join("_example", "伊号潜水艦.png")
 	pix, err := lept.PixRead(targetFile)
 
@@ -439,13 +428,10 @@ func ExampleConvertRGBToLuminance() {
 	tmpFilename := filepath.Join(tmpDir, "translateGrayscale4.png")
 	tpix.PixWrite(tmpFilename, lept.IFF_PNG)
 	// Output:
-	// leptonica version: leptonica-1.72
 	// ConvertRGBToLuminance: _example/伊号潜水艦.png
 }
 
 func ExampleSobelEdgeFilter() {
-	version := lept.Version()
-	fmt.Println("leptonica version: " + version)
 	targetFile := filepath.Join("_example", "伊号潜水艦.png")
 	pix, err := lept.PixRead(targetFile)
 
@@ -476,7 +462,6 @@ func ExampleSobelEdgeFilter() {
 	tmpFilename := filepath.Join(tmpDir, "appliedSobelFilter.png")
 	epix.PixWrite(tmpFilename, lept.IFF_PNG)
 	// Output:
-	// leptonica version: leptonica-1.72
 	// ConvertTo8: _example/伊号潜水艦.png
 	// Apply SobelEdgeFilter: _example/伊号潜水艦.png
 }
