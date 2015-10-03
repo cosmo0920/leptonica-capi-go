@@ -15,7 +15,7 @@ func main() {
 		panic("Could not read specified png file.")
 	}
 
-	fmt.Println("ConvertRGBToGrayFast:", targetFile)
+	fmt.Println("ConvertRGBToGrayMinMax:", targetFile)
 	tpix, err := pix.ConvertRGBToGrayMinMax(lept.L_CHOOSE_MAX)
 
 	if err != nil {
