@@ -2,6 +2,7 @@ package leptonica_test
 
 import (
 	lept "github.com/cosmo0920/leptonica-capi-go"
+	"fmt"
 	"io/ioutil"
 	"path/filepath"
 	"testing"
@@ -316,4 +317,166 @@ func TestBoxaCreate(t *testing.T) {
 	if err != nil {
 		t.Errorf("Could not create boxa(s).")
 	}
+}
+
+func ExampleConvertRGBToGrayFast() {
+	version := lept.Version()
+	fmt.Println("leptonica version: " + version)
+	targetFile := filepath.Join("_example", "伊号潜水艦.png")
+	pix, err := lept.PixRead(targetFile)
+
+	if err != nil {
+		t.Errorf("Could not read specified png file.")
+	}
+
+	fmt.Println("ConvertRGBToGrayFast:", targetFile)
+	tpix, err := pix.ConvertRGBToGrayFast()
+
+	if err != nil {
+		t.Errorf("Could not convert specified pix to grayscale.")
+	}
+
+	result := pix.PixEqual(tpix)
+
+	if result == true {
+		t.Errorf("Suspicious pix conversion.")
+	}
+
+	tmpDir, _ := ioutil.TempDir("", "temp-lept")
+	tmpFilename := filepath.Join(tmpDir, "translateGrayscale.png")
+	tpix.PixWrite(tmpFilename, lept.IFF_PNG)
+	// Output:
+	// leptonica version: leptonica-1.72
+	// ConvertRGBToGrayFast: _example/伊号潜水艦.png
+}
+
+func ExampleConvertRGBToGrayMinMax() {
+	version := lept.Version()
+	fmt.Println("leptonica version: " + version)
+	targetFile := filepath.Join("_example", "伊号潜水艦.png")
+	pix, err := lept.PixRead(targetFile)
+
+	if err != nil {
+		t.Errorf("Could not read specified png file.")
+	}
+
+	fmt.Println("ConvertRGBToGrayMinMax:", targetFile)
+	tpix, err := pix.ConvertRGBToGrayMinMax(lept.L_CHOOSE_MAX)
+
+	if err != nil {
+		t.Errorf("Could not convert specified pix to grayscale.")
+	}
+
+	result := pix.PixEqual(tpix)
+
+	if result == true {
+		t.Errorf("Suspicious pix conversion.")
+	}
+
+	tmpDir, _ := ioutil.TempDir("", "temp-lept")
+	tmpFilename := filepath.Join(tmpDir, "translateGrayscale2.png")
+	tpix.PixWrite(tmpFilename, lept.IFF_PNG)
+	// Output:
+	// leptonica version: leptonica-1.72
+	// ConvertRGBToGrayMinMax: _example/伊号潜水艦.png
+}
+
+func ExampleConvertRGBToGray() {
+	version := lept.Version()
+	fmt.Println("leptonica version: " + version)
+	targetFile := filepath.Join("_example", "伊号潜水艦.png")
+	pix, err := lept.PixRead(targetFile)
+
+	if err != nil {
+		t.Errorf("Could not read specified png file.")
+	}
+
+	fmt.Println("ConvertRGBToGray:", targetFile)
+	tpix, err := pix.ConvertRGBToGray(0.35, 0.35, 0.3)
+
+	if err != nil {
+		t.Errorf("Could not convert specified pix to grayscale.")
+	}
+
+	result := pix.PixEqual(tpix)
+
+	if result == true {
+		t.Errorf("Suspicious pix conversion.")
+	}
+
+	tmpDir, _ := ioutil.TempDir("", "temp-lept")
+	tmpFilename := filepath.Join(tmpDir, "translateGrayscale3.png")
+	tpix.PixWrite(tmpFilename, lept.IFF_PNG)
+	// Output:
+	// leptonica version: leptonica-1.72
+	// ConvertRGBToGray: _example/伊号潜水艦.png
+}
+
+func ExampleConvertRGBToLuminance() {
+	version := lept.Version()
+	fmt.Println("leptonica version: " + version)
+	targetFile := filepath.Join("_example", "伊号潜水艦.png")
+	pix, err := lept.PixRead(targetFile)
+
+	if err != nil {
+		t.Errorf("Could not read specified png file.")
+	}
+
+	fmt.Println("ConvertRGBToLuminance:", targetFile)
+	tpix, err := pix.ConvertRGBToLuminance()
+
+	if err != nil {
+		t.Errorf("Could not convert specified pix to grayscale.")
+	}
+
+	result := pix.PixEqual(tpix)
+
+	if result == true {
+		t.Errorf("Suspicious pix conversion.")
+	}
+
+	tmpDir, _ := ioutil.TempDir("", "temp-lept")
+	tmpFilename := filepath.Join(tmpDir, "translateGrayscale4.png")
+	tpix.PixWrite(tmpFilename, lept.IFF_PNG)
+	// Output:
+	// leptonica version: leptonica-1.72
+	// ConvertRGBToLuminance: _example/伊号潜水艦.png
+}
+
+func ExampleSobelEdgeFilter() {
+	version := lept.Version()
+	fmt.Println("leptonica version: " + version)
+	targetFile := filepath.Join("_example", "伊号潜水艦.png")
+	pix, err := lept.PixRead(targetFile)
+
+	if err != nil {
+		t.Errorf("Could not read specified png file.")
+	}
+
+	fmt.Println("ConvertTo8:", targetFile)
+	tpix := pix.ConvertTo8(lept.HAS_COLOR_MAP)
+
+	if tpix.RawPix() == nil {
+		t.Errorf("Could not convert specified pix to 8bpp.")
+	}
+
+	result := pix.PixEqual(tpix)
+
+	if result == true {
+		t.Errorf("Suspicious pix conversion.")
+	}
+
+	fmt.Println("Apply SobelEdgeFilter:", targetFile)
+	epix, err := tpix.SobelEdgeFilter(lept.L_ALL_EDGES)
+
+	if err != nil {
+		t.Errorf("Could not apply sobelEdgeFilter to pix.")
+	}
+	tmpDir, _ := ioutil.TempDir("", "temp-lept")
+	tmpFilename := filepath.Join(tmpDir, "appliedSobelFilter.png")
+	epix.PixWrite(tmpFilename, lept.IFF_PNG)
+	// Output:
+	// leptonica version: leptonica-1.72
+	// ConvertTo8: _example/伊号潜水艦.png
+	// Apply SobelEdgeFilter: _example/伊号潜水艦.png
 }
