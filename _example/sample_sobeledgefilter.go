@@ -15,8 +15,8 @@ func main() {
 		panic("Could not read specified png file.")
 	}
 
-	fmt.Println("ConvertRGBToGrayFast:", targetFile)
-	tpix, err := pix.ConvertRGBToGrayFast()
+	fmt.Println("ConvertTo8:", targetFile)
+	tpix := pix.ConvertTo8(lept.HAS_COLOR_MAP)
 
 	if err != nil {
 		panic("Could not convert specified pix to grayscale.")
