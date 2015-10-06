@@ -116,7 +116,6 @@ func TestMedianFilter(t *testing.T) {
 
 	if os.Getenv("CI") == "" {
 		t.Skip("This is long test case.")
-		return
 	}
 
 	dim, err := pix.GetDimension()
