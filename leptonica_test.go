@@ -4,6 +4,7 @@ import (
 	lept "github.com/cosmo0920/leptonica-capi-go"
 	"fmt"
 	"io/ioutil"
+	"os"
 	"path/filepath"
 	"testing"
 )
@@ -107,6 +108,31 @@ func TestGetDimension(t *testing.T) {
 
 	if dim == nil {
 		t.Errorf("Suspicious dimensions.")
+	}
+}
+
+func TestMedianFilter(t *testing.T) {
+	pix := setUp()
+
+	if os.Getenv("CI") == "" {
+		t.Skip("This is long test case.")
+		return
+	}
+
+	dim, err := pix.GetDimension()
+
+	if err != nil {
+		t.Errorf("Could not get dimensions from specified pix.")
+	}
+
+	if dim == nil {
+		t.Errorf("Suspicious dimensions.")
+	}
+
+	_, err = pix.MedianFilter(dim.Width, dim.Height)
+
+	if err != nil {
+		t.Errorf("Could not apply median filter to specified pix.")
 	}
 }
 
