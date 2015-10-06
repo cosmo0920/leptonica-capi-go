@@ -13,7 +13,7 @@ type Pix struct {
 }
 
 type Dimension struct {
-	Wide   int
+	Width  int
 	Height int
 }
 
