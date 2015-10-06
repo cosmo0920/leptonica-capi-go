@@ -57,9 +57,9 @@ func (t *Pix) GetDimension() (*Dimension, error) {
 	return dim, nil
 }
 
-func (t *Pix) RankFilterGray(h int, w int, rank float32) (*Pix, error) {
+func (t *Pix) RankFilterGray(width int, height int, rank float32) (*Pix, error) {
 	cPix := C.pixRankFilterGray(t.pix,
-		C.l_int32(h), C.l_int32(w), C.l_float32(rank))
+		C.l_int32(width), C.l_int32(height), C.l_float32(rank))
 
 	if cPix == nil {
 		return nil, errors.New("cannot create *Pix")
