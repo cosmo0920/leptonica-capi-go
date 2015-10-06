@@ -71,6 +71,20 @@ func (t *Pix) RankFilterGray(width int, height int, rank float32) (*Pix, error) 
 	return pixd, nil
 }
 
+func (t *Pix) MedianFilter(width int, height int) (*Pix, error) {
+	cPix := C.pixMedianFilter(t.pix,
+		C.l_int32(width), C.l_int32(height))
+
+	if cPix == nil {
+		return nil, errors.New("cannot create *Pix")
+	}
+
+	pixd := &Pix{pix: cPix}
+
+	runtime.SetFinalizer(pixd, (*Pix).finalize)
+	return pixd, nil
+}
+
 func (t *Pix) DilateGray(h int, w int) (*Pix, error) {
 	cPix := C.pixDilateGray(t.pix,
 		C.l_int32(h), C.l_int32(w))
