@@ -1,8 +1,8 @@
 package leptonica_test
 
 import (
-	lept "github.com/cosmo0920/leptonica-capi-go"
 	"fmt"
+	lept "github.com/cosmo0920/leptonica-capi-go"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -154,8 +154,8 @@ func TestRankFilter(t *testing.T) {
 
 	tpix, err := pix.RemoveColormap(lept.HAS_COLOR_MAP)
 
-		if err != nil {
-			t.Errorf("Could not remove colormap from specified pix.")
+	if err != nil {
+		t.Errorf("Could not remove colormap from specified pix.")
 	}
 
 	_, err = tpix.RankFilter(dim.Width, dim.Height, 0.4)
