@@ -57,8 +57,8 @@ func (t *Pix) GetDimension() (*Dimension, error) {
 	return dim, nil
 }
 
-func (t *Pix) RankFilterGray(width int, height int, rank float32) (*Pix, error) {
-	cPix := C.pixRankFilterGray(t.pix,
+func (t *Pix) RankFilter(width int, height int, rank float32) (*Pix, error) {
+	cPix := C.pixRankFilter(t.pix,
 		C.l_int32(width), C.l_int32(height), C.l_float32(rank))
 
 	if cPix == nil {

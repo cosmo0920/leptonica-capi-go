@@ -135,6 +135,36 @@ func TestMedianFilter(t *testing.T) {
 	}
 }
 
+func TestRankFilter(t *testing.T) {
+	pix := setUp()
+
+	if os.Getenv("CI") == "" {
+		t.Skip("This is long test case.")
+	}
+
+	dim, err := pix.GetDimension()
+
+	if err != nil {
+		t.Errorf("Could not get dimensions from specified pix.")
+	}
+
+	if dim == nil {
+		t.Errorf("Suspicious dimensions.")
+	}
+
+	tpix, err := pix.RemoveColormap(lept.HAS_COLOR_MAP)
+
+		if err != nil {
+			t.Errorf("Could not remove colormap from specified pix.")
+	}
+
+	_, err = tpix.RankFilter(dim.Width, dim.Height, 0.4)
+
+	if err != nil {
+		t.Errorf("Could not apply rank filter to specified pix.")
+	}
+}
+
 func TestAddBorder(t *testing.T) {
 	pix := setUp()
 
