@@ -112,11 +112,11 @@ func TestGetDimension(t *testing.T) {
 }
 
 func TestMedianFilter(t *testing.T) {
-	pix := setUp()
-
 	if os.Getenv("CI") == "" {
 		t.Skip("This is long test case.")
 	}
+
+	pix := setUp()
 
 	dim, err := pix.GetDimension()
 
@@ -136,11 +136,11 @@ func TestMedianFilter(t *testing.T) {
 }
 
 func TestRankFilter(t *testing.T) {
-	pix := setUp()
-
 	if os.Getenv("CI") == "" {
 		t.Skip("This is long test case.")
 	}
+
+	pix := setUp()
 
 	dim, err := pix.GetDimension()
 
