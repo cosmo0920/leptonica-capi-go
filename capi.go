@@ -288,7 +288,7 @@ func (t *Pix) RemoveColormap(colorMap ColorMap) (*Pix, error) {
 func (t *Pix) ColorSegment(max_dist int, max_color int, sel_size int, final_colors int) (*Pix, error) {
 	cPix := C.pixColorSegment(t.pix,
 		C.l_int32(max_dist), C.l_int32(max_color),
-		C.l_int32(sel_size), C.l_int32(final_colors))
+		C.l_int32(sel_size), C.l_int32(final_colors), C.l_int32(0))
 
 	if cPix == nil {
 		return nil, errors.New("cannot remove color map from *Pix")
