@@ -15,16 +15,7 @@ $ brew install leptonica
 
 ### Ubuntu Linux
 
-```bash
-$ sudo apt-get install libleptonica-dev
-```
-
-### FreeBSD (pkgng)
-
-```bash
-$ export CC=clang
-$ sudo pkg install leptonica
-```
+Current version is too old, please build liblept5 by yourself.
 
 ### Windows
 
